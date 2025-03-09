@@ -31,11 +31,17 @@
         .header-content {
             text-align: left;
             margin-bottom: 30px;
+            position: relative; /* لجعل الشعار يتحرك مع التمرير */
         }
 
         .logo {
             width: 100px;
             margin-bottom: 10px;
+            transition: opacity 0.3s ease; /* إضافة انتقال سلس */
+        }
+
+        .logo.hidden {
+            opacity: 0; /* إخفاء الشعار */
         }
 
         .breadcrumb {
@@ -78,11 +84,6 @@
             object-fit: cover;
             border-radius: 10px;
             margin-bottom: 15px;
-            transition: opacity 0.3s ease; /* إضافة انتقال سلس */
-        }
-
-        .banner.hidden {
-            opacity: 0; /* إخفاء البانر */
         }
 
         .input-instruction {
@@ -369,17 +370,17 @@
     <script>
         // دالة لتتبع حركة التمرير
         let lastScrollTop = 0;
-        const banner = document.querySelector('.banner');
+        const logo = document.querySelector('.logo');
 
         window.addEventListener('scroll', function() {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
             if (scrollTop > lastScrollTop) {
-                // التمرير للأسفل: إخفاء البانر
-                banner.classList.add('hidden');
+                // التمرير للأسفل: إخفاء الشعار
+                logo.classList.add('hidden');
             } else {
-                // التمرير للأعلى: إظهار البانر
-                banner.classList.remove('hidden');
+                // التمرير للأعلى: إظهار الشعار
+                logo.classList.remove('hidden');
             }
 
             lastScrollTop = scrollTop;
