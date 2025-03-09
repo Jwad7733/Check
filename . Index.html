@@ -26,22 +26,21 @@
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            padding-top: 120px; /* إضافة هامش أعلى لتجنب التداخل مع الشعار */
         }
 
         .header-content {
             text-align: left;
             margin-bottom: 30px;
-            position: relative; /* لجعل الشعار يتحرك مع التمرير */
         }
 
         .logo {
             width: 100px;
             margin-bottom: 10px;
-            transition: opacity 0.3s ease; /* إضافة انتقال سلس */
-        }
-
-        .logo.hidden {
-            opacity: 0; /* إخفاء الشعار */
+            position: fixed; /* جعل الشعار ثابتًا */
+            top: 10px; /* المسافة من الأعلى */
+            left: 10px; /* المسافة من اليسار */
+            z-index: 1000; /* التأكد من ظهور الشعار فوق العناصر الأخرى */
         }
 
         .breadcrumb {
@@ -84,11 +83,6 @@
             object-fit: cover;
             border-radius: 10px;
             margin-bottom: 15px;
-            transition: opacity 0.3s ease; /* إضافة انتقال سلس */
-        }
-
-        .banner.hidden {
-            opacity: 0; /* إخفاء البانر */
         }
 
         .input-instruction {
@@ -141,11 +135,11 @@
 
         #result {
             margin: 20px auto;
-            padding: 25px; /* زيادة المساحة الداخلية */
+            padding: 25px;
             border-radius: 10px;
             font-size: 1.1rem;
-            max-width: 450px; /* زيادة العرض الأقصى */
-            min-height: 60px; /* زيادة الارتفاع الأدنى */
+            max-width: 450px;
+            min-height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -207,7 +201,6 @@
             margin-top: 20px;
         }
 
-        /* أنماط جديدة للزرين في الجزء السفلي */
         .bottom-buttons {
             display: flex;
             justify-content: space-between;
@@ -226,7 +219,7 @@
             background: none;
             border: none;
             cursor: pointer;
-            font-size: 1.5rem; /* حجم أكبر للأيقونات */
+            font-size: 1.5rem;
             color: #777;
             padding: 5px 10px;
             transition: color 0.3s ease;
@@ -237,25 +230,24 @@
         }
 
         .bottom-buttons .home-button {
-            margin-right: 40px; /* تحريك زر البيت إلى اليمين أكثر */
+            margin-right: 40px;
         }
 
         .bottom-buttons .menu-button {
-            margin-left: 40px; /* تحريك زر القائمة إلى اليسار أكثر */
+            margin-left: 40px;
         }
 
-        /* أنماط لشكل البيت */
         .home-icon {
             width: 24px;
             height: 24px;
-            fill: none; /* بدون تعبئة */
-            stroke: #777; /* لون الحدود رمادي */
-            stroke-width: 2; /* سمك الحدود */
+            fill: none;
+            stroke: #777;
+            stroke-width: 2;
             transition: stroke 0.3s ease;
         }
 
         .home-button:hover .home-icon {
-            stroke: #333; /* لون الحدود رمادي غامق عند التحويم */
+            stroke: #333;
         }
 
         @media (max-width: 768px) {
@@ -323,7 +315,6 @@
     <div class="bottom-buttons">
         <button class="menu-button">☰</button>
         <button class="home-button">
-            <!-- رمز SVG لشكل بيت بدون تعبئة -->
             <svg class="home-icon" viewBox="0 0 24 24">
                 <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" fill="none" stroke="currentColor" stroke-width="2"/>
             </svg>
@@ -343,13 +334,13 @@
             <p><a href="#">Contact Us</a></p>
         </div>
         <div class="dpp-section">
-            <p class="center-text">DPP</p> <!-- توسيط DPP أسفل Useful Links -->
+            <p class="center-text">DPP</p>
         </div>  
         <div class="right-section">
             <div class="dpp-section">
-                <p class="center-text">iPod</p> <!-- توسيط iPod أسفل Useful Links -->
-                <p class="center-text">Apple TV</p> <!-- توسيط Apple TV أسفل Useful Links -->
-                <p class="center-text">Apple Watch TV </p> <!-- توسيط Apple Watch TV  أسفل Useful Links -->
+                <p class="center-text">iPod</p>
+                <p class="center-text">Apple TV</p>
+                <p class="center-text">Apple Watch TV </p>
             </div>
             <h2>Products</h2>
             <p><a href="#">iPhone</a></p>
@@ -358,7 +349,7 @@
         </div>
         <div class="right-section">
             <div class="dpp-section">
-                <p class="center-text">Terms and Conditions</p> <!-- توسيط Terms and Conditions أسفل Useful Links -->
+                <p class="center-text">Terms and Conditions</p>
             </div> 
             <h2>Information</h2>
             <p><a href="##">Learn How</a></p>
@@ -373,24 +364,6 @@
     </div>
 
     <script>
-        // دالة لتتبع حركة التمرير
-        let lastScrollTop = 0;
-        const banner = document.querySelector('.banner');
-
-        window.addEventListener('scroll', function() {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-            if (scrollTop > lastScrollTop) {
-                // التمرير للأسفل: إظهار الشعار
-                banner.classList.remove('hidden');
-            } else {
-                // التمرير للأعلى: إخفاء الشعار
-                banner.classList.add('hidden');
-            }
-
-            lastScrollTop = scrollTop;
-        });
-
         function validateForm(event) {
             event.preventDefault();
             const button = event.target;
