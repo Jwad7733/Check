@@ -84,6 +84,11 @@
             object-fit: cover;
             border-radius: 10px;
             margin-bottom: 15px;
+            transition: opacity 0.3s ease; /* إضافة انتقال سلس */
+        }
+
+        .banner.hidden {
+            opacity: 0; /* إخفاء البانر */
         }
 
         .input-instruction {
@@ -360,31 +365,27 @@
             <p><a href="##">Service Providers</a></p>
             <p><a href="##">Contact Us</a></p>
         </div>
-           <h2>Support and Sales</h2>
+        <div class="right-section">
+            <h2>Support and Sales</h2>
             <p><a href="#">For Maintenance: Visit AC-Care</a></p>
             <p><a href="#">For Individual Sales: Point of Sales</a></p>
-            <p><a href="mailto:sales@arabcomputers.com.sa">For Corporate or Channels Sales: sales@arabcomputers.com.sa</a></p>
         </div>
-
-
-    <div class="footer">
-        <p>© Arab Computers 2022. All rights reserved.</p>
     </div>
 
     <script>
         // دالة لتتبع حركة التمرير
         let lastScrollTop = 0;
-        const logo = document.querySelector('.logo');
+        const banner = document.querySelector('.banner');
 
         window.addEventListener('scroll', function() {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
             if (scrollTop > lastScrollTop) {
-                // التمرير للأسفل: إخفاء الشعار
-                logo.classList.add('hidden');
+                // التمرير للأسفل: إظهار الشعار
+                banner.classList.remove('hidden');
             } else {
-                // التمرير للأعلى: إظهار الشعار
-                logo.classList.remove('hidden');
+                // التمرير للأعلى: إخفاء الشعار
+                banner.classList.add('hidden');
             }
 
             lastScrollTop = scrollTop;
