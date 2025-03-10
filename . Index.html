@@ -125,29 +125,11 @@
             color: #a8822b !important;
         }
 
-        #result {
-            margin: 20px auto;
-            padding: 25px;
-            border-radius: 10px;
+        .result-text {
             font-size: 1.1rem;
-            max-width: 450px;
-            min-height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            margin: 20px auto;
             text-align: center;
-        }
-
-        .success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
+            color: #333;
         }
 
         .links {
@@ -188,7 +170,7 @@
 
         .bottom-buttons {
             display: flex;
-            justify-content: space-around; /* توزيع الأزرار بشكل متساوٍ */
+            justify-content: space-around;
             align-items: center;
             padding: 8px 20px;
             background-color: white;
@@ -208,7 +190,7 @@
             color: #777;
             padding: 5px 10px;
             transition: color 0.3s ease;
-            margin: 0 10px; /* إضافة هوامش لتقريب الأزرار من الوسط */
+            margin: 0 10px;
         }
 
         .bottom-buttons button:hover {
@@ -216,11 +198,11 @@
         }
 
         .home-button {
-            margin-left: 20px; /* تحريك زر الهوم قليلاً نحو الوسط */
+            margin-left: 20px;
         }
 
         .menu-button {
-            margin-right: 20px; /* تحريك زر الخيارات قليلاً نحو الوسط */
+            margin-right: 20px;
         }
 
         .home-icon {
@@ -294,7 +276,8 @@
             <button type="submit" onclick="validateForm(event)">Check</button>
         </div>
 
-        <div id="result"></div>
+        <!-- النتيجة ستظهر هنا كنص عادي -->
+        <div id="result" class="result-text"></div>
     </div>
 
     <!-- الأزرار في الجزء السفلي -->
@@ -344,6 +327,40 @@
             <p><a href="#">For Individual Sales: Point of Sales</a></p>
         </div>
     </div>
+
+    <script>
+        function validateForm(event) {
+            event.preventDefault();
+            const button = event.target;
+            const allowedCodes = ["2KKDX1RNX0", "3ANMH9TBMT", "3QFD18EA78"];
+            
+            const numberInput = document.getElementById("numberInput").value;
+            const resultElement = document.getElementById("result");
+            
+            button.classList.add('pressed');
+
+            resultElement.className = '';
+            resultElement.textContent = '';
+
+            const usedCodes = JSON.parse(localStorage.getItem("usedCodes")) || [];
+
+            setTimeout(() => {
+                if (usedCodes.includes(numberInput)) {
+                    resultElement.textContent = "code is already used❌ تم استخدام هذا الرمز !";
+                } else if (allowedCodes.includes(numberInput)) {
+                    usedCodes.push(numberInput);
+                    localStorage.setItem("usedCodes", JSON.stringify(usedCodes));
+                    resultElement.textContent = "The code is correct ✅ هذا الرمز صحيح!";
+                } else {
+                    resultElement.textContent = " Code not found ❌ هذا الرمز غير موجود !";
+                }
+                
+                button.classList.remove('pressed');
+            }, 500);
+        }
+    </script>
+</body>
+</html>
 
     <script>
         function validateForm(event) {
